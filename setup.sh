@@ -68,9 +68,10 @@ if [ "$HELP" = true ] ; then
 fi
 
 if [ "$NEW_ENV" = true ] ; then
-    conda create -n trellis python=3.10
+    conda create -n trellis python=3.11
     conda activate trellis
-    conda install pytorch==2.4.0 torchvision==0.19.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+    conda install pytorch==2.5.1 torchvision==0.20.1 pytorch-cuda=12.4 -c pytorch -c nvidia
+    conda install -c conda-forge libstdcxx-ng
 fi
 
 # Get system information
@@ -195,6 +196,8 @@ if [ "$KAOLIN" = true ] ; then
             2.2.1) pip install kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.2.1_cu118.html;;
             2.2.2) pip install kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.2.2_cu118.html;;
             2.4.0) pip install kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.4.0_cu121.html;;
+            2.5.0) pip install kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.5.1_cu124.html;;
+            2.5.1) pip install kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.5.1_cu124.html;;
             *) echo "[KAOLIN] Unsupported PyTorch version: $PYTORCH_VERSION" ;;
         esac
     else
@@ -256,5 +259,6 @@ if [ "$SPCONV" = true ] ; then
 fi
 
 if [ "$DEMO" = true ] ; then
-    pip install gradio==4.44.1 gradio_litmodel3d==0.0.1
+    pip install gradio_litmodel3d==0.0.1
+    pip install -U gradio==5.25.1
 fi
